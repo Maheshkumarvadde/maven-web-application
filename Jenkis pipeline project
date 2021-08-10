@@ -1,0 +1,42 @@
+node
+{
+def mavenhome = tool name: "maven3.8.1"
+
+stage ('checkoutcode' )
+{
+git branch: 'development', credentialsId: 'dec47109-b6ae-459c-8eed-e6a411e027a4', url: 'https://github.com/Maheshkumarvadde/maven-web-application.git'    
+}
+
+stage( 'build')
+{
+
+sh "${mavenhome}/bin/mvn clean package"
+}
+stage ( 'excutesonarqubereport')
+{
+sh "${mavenhome}/bin/mvn sonar:sonar"
+}
+
+stage ( 'uploadartifactintonexus' )
+{
+sh "${mavenhome}/bin/mvn deploy"    
+}
+
+stage( 'deployappintotomcat' )
+{
+sshagent(['ec72bec7-c13a-4397-87a4-4e3947ee5ca1']) 
+{
+sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@107.22.131.109:/opt/apache-tomcat-10.0.8/webapps/"
+
+}
+}
+
+stage('send email notification')
+{
+    mail bcc: '', body: '''with regards
+
+mahesh''', cc: '', from: '', replyTo: '', subject: '', to: 'maheshdevops95@gmail.com'
+}
+
+}
+
