@@ -16,7 +16,7 @@ stage ( 'excutesonarqubereport')
 {
 sh "${mavenhome}/bin/mvn sonar:sonar"
 }
-
+/*
 stage ( 'uploadartifactintonexus' )
 {
 sh "${mavenhome}/bin/mvn deploy"    
@@ -37,6 +37,6 @@ stage('send email notification')
 
 mahesh''', cc: '', from: '', replyTo: '', subject: '', to: 'maheshdevops95@gmail.com'
 }
-
+*/
 }
 
