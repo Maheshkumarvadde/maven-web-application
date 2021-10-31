@@ -34,7 +34,7 @@ stages{
    sh "mvn clean package"
    }
   }
-*/
+/*
 stage('ExecuteSonarqubeReport')
   {
     steps{
@@ -79,5 +79,5 @@ post{
    9980923226''', subject: 'Build is over - Declarative way..', to: 'devopstrainingblr@gmail.com,bhaskar0504@gmail.com'
    }
   }
-/*
+*/
 }
