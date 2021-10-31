@@ -1,6 +1,6 @@
 pipeline{
 
-agent any
+agent{label 'node1}
 
 triggers{
  pollSCM('* * * * *')
@@ -12,14 +12,14 @@ buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', 
 }
 
 tools{
-maven "maven3.6.3"
+maven "Maven-3.8.3"
 }
 
 stages{
 
  stage('CheckoutCode'){
  steps{
-   git branch: 'development', credentialsId: '6a6dfb50-0907-46a0-9303-c9c87db27742', url: 'https://github.com/MithunTechnologiesDevOps/maven-web-application.git'
+   git branch: 'development', credentialsId: '3dd42b20-4ba3-4508-8e2b-81859d0ee3e1', url: 'https://github.com/Maheshkumarvadde/maven-web-application.git'
  }
  }
  
@@ -48,7 +48,7 @@ stages{
    }
   }
  }
-*/
+
 
 }//Stages Closing
 
@@ -68,6 +68,6 @@ post{
  Mithun Technologies,
  9980923226''', subject: 'Build is Over - Failed!!', to: 'devopstrainingblr@gmail.com'
  }
- 
+ */
 }
 }
